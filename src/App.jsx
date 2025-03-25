@@ -31,10 +31,12 @@ function App() {
 
   return (
     <>
+    <h1>hola</h1>
     <div className="RiveContainer">
       <RiveDemo />
       {/* <UrlDemo /> */}
     </div>
+    
     </>
   )
 }
