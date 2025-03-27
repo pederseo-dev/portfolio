@@ -10,9 +10,10 @@ body {
 
 .RiveContainer {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  height: 300px;
+  width: 60%;
   background-color: black;
+  border: 15px;
   margin: 0;
   padding: 0;
 }
