@@ -1,4 +1,4 @@
-## iniciar
+## init
 ```shell
 # isntallation
 npm install
@@ -15,3 +15,6 @@ npm run preview
 # deployd changes
 npm run deploy
 ```
+
+# URL Deployd
+- https://pederseo-dev.github.io/portfolio/
