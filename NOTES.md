@@ -24,7 +24,7 @@ export default defineConfig({
 ```json
 "scripts": {
   "dev": "vite",
-  "deploy": "gh-pages -d dist", // agregar direccion de deplod
+  "deploy": "gh-pages -d dist", // agregar direccion de deploy
   "build": "vite build",
   "lint": "eslint .",
   "preview": "vite preview"
