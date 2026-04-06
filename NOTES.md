@@ -42,3 +42,23 @@ npm run deploy
 
 ```
 
+# Google FireBase stack
+## auth con google oauth + firestore rules
+
+### firebase console
+1. Authentication → Sign-in method → habilitar Google
+2. Firestore → Rules → restringir write por email:
+   allow write: if request.auth != null && request.auth.token.email == 'tu@gmail.com';
+
+### stack
+- `firebase/auth` → signInWithPopup + GoogleAuthProvider
+- `react-firebase-hooks` → useAuthState para escuchar estado del user
+- JWT token guardado automático en IndexedDB por el SDK
+- token se renueva cada hora, se limpia con signOut()
+
+### flujo
+1. usuario clickea acción admin
+2. si no hay user → LoginOverlay → signInWithPopup
+3. google retorna token → firebase lo valida
+4. useAuthState detecta el cambio → user disponible en AuthContext
+5. firestore valida el email del token en cada write desde el servidor

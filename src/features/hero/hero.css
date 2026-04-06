@@ -1,0 +1,47 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--space-lg);
+  gap: var(--space-md);
+}
+
+.hero__greeting { font-size: var(--font-size-lg); opacity: 0.6; }
+
+.hero__name {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.hero__role     { font-size: var(--font-size-lg); opacity: 0.6; }
+.hero__bio      { font-size: var(--font-size-md); max-width: 480px; opacity: 0.8; }
+
+.hero__actions  { display: flex; gap: var(--space-md); margin-top: var(--space-sm); }
+
+.hero__actions button {
+  padding: 0.7em 1.6em;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-family: var(--font-base);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.hero__actions button:first-child {
+  background-color: var(--color-accent);
+  color: #000;
+  border: none;
+  font-weight: 600;
+}
+
+.hero__actions button:last-child {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.hero__actions button:hover { opacity: 0.8; }

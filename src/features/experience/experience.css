@@ -1,0 +1,117 @@
+.experience {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--space-lg);
+  gap: var(--space-lg);
+}
+
+.experience__title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  text-align: center;
+}
+
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
+}
+
+.timeline-controls button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--color-text);
+  padding: 0.3em 0.8em;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.timeline-controls button:hover { border-color: var(--color-accent); }
+.timeline-controls button:disabled { opacity: 0.2; cursor: default; }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.timeline__labels {
+  position: relative;
+  height: 20px;
+}
+
+.timeline__labels span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: var(--font-size-sm);
+  opacity: 0.4;
+}
+
+.timeline__tracks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.timeline__track {
+  position: relative;
+  height: 48px;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+}
+
+.timeline__block {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: var(--radius-sm);
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-sm);
+  overflow: hidden;
+}
+
+.timeline__block:hover,
+.timeline__block--active { opacity: 1; }
+
+.timeline__block-label {
+  font-size: var(--font-size-sm);
+  color: #000;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timeline__detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-md);
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.timeline__detail-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.timeline__logo { width: 40px; height: 40px; object-fit: contain; }
+.timeline__role { font-size: var(--font-size-lg); font-weight: 600; }
+.timeline__company { font-size: var(--font-size-md); opacity: 0.6; }
+.timeline__period { font-size: var(--font-size-sm); opacity: 0.5; }
+.timeline__description { font-size: var(--font-size-md); opacity: 0.8; line-height: 1.6; }
