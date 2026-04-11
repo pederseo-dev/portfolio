@@ -1,29 +1,86 @@
+/* src/features/hero/hero.css */
+
+/* --- Layout --- */
 .hero {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 var(--space-lg);
-  gap: var(--space-md);
 }
 
-.hero__greeting { font-size: var(--font-size-lg); opacity: 0.6; }
+.hero .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* --- Filas --- */
+.hero__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+/* --- Fila 1 izquierda: Presentación --- */
+.hero__intro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.hero__greeting {
+  font-size: var(--font-size-lg);
+  opacity: 0.6;
+}
 
 .hero__name {
   font-size: var(--font-size-xl);
   font-weight: 700;
   color: var(--color-accent);
+  line-height: 1.1;
 }
 
-.hero__role     { font-size: var(--font-size-lg); opacity: 0.6; }
-.hero__bio      { font-size: var(--font-size-md); max-width: 480px; opacity: 0.8; }
+.hero__role {
+  font-size: var(--font-size-lg);
+  opacity: 0.6;
+}
 
-.hero__actions  { display: flex; gap: var(--space-md); margin-top: var(--space-sm); }
+/* --- Fila 1 derecha: Imagen principal --- */
+.hero__image {
+  flex: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
 
-.hero__actions button {
-  padding: 0.7em 1.6em;
+.hero__image img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Fila 2 izquierda: Bio + botones --- */
+.hero__bio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  font-size: var(--font-size-md);
+  opacity: 0.8;
+  line-height: 1.7;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.hero__btn {
+  padding: 0.7em 1.4em;
   border-radius: var(--radius-md);
   font-size: var(--font-size-md);
   font-family: var(--font-base);
@@ -31,17 +88,51 @@
   transition: opacity 0.2s;
 }
 
-.hero__actions button:first-child {
+.hero__btn:hover { opacity: 0.8; }
+
+.hero__btn--primary {
   background-color: var(--color-accent);
   color: #000;
   border: none;
   font-weight: 600;
 }
 
-.hero__actions button:last-child {
+.hero__btn--outline {
   background-color: transparent;
   color: var(--color-accent);
   border: 1px solid var(--color-accent);
 }
 
-.hero__actions button:hover { opacity: 0.8; }
+/* --- Fila 2 derecha: Avatar --- */
+.hero__avatar {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__avatar img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-accent);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .hero { padding: var(--space-xl) var(--space-lg); }
+
+  .hero__row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero__row:nth-child(2) { flex-direction: column-reverse; }
+
+  .hero__actions { justify-content: center; }
+
+  .hero__avatar img {
+    width: 150px;
+    height: 150px;
+  }
+}

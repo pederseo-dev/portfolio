@@ -1,9 +1,11 @@
+// src/features/projects/projects.jsx
 import { useEffect, useState } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../../app/fireBase'
+import { getProjects, deleteProject } from '../../db/projects'
+import { useAuth } from '../../app/auth'
+import ProjectForm from '../admin/forms/projectsForm'
 import './projects.css'
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, isAdmin, onDelete }) {
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const [hovered, setHovered] = useState(false)
 
@@ -14,6 +16,7 @@ function ProjectCard({ project }) {
 
   return (
     <a
+    
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
@@ -22,6 +25,9 @@ function ProjectCard({ project }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      {isAdmin && (
+        <button className="card__delete" onClick={e => { e.preventDefault(); onDelete(project.id) }}>✕</button>
+      )}
       {project.image && hovered && (
         <div className="project-card__preview" style={{ top: pos.y + 16, left: pos.x + 16 }}>
           <img src={project.image} alt={project.name} />
@@ -52,32 +58,49 @@ function ProjectCard({ project }) {
 }
 
 function Projects() {
+  const { user } = useAuth()
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
-    async function fetch() {
-      const snapshot = await getDocs(collection(db, 'portfolio-projects'))
-      const data = snapshot.docs
-        .map(doc => ({ id: doc.id, ...doc.data() }))
-        .filter(p => p.active)
-      setProjects(data)
-      setLoading(false)
-    }
-    fetch()
+    getProjects()
+      .then(data => setProjects(data.filter(p => p.active)))
+      .finally(() => setLoading(false))
   }, [])
+
+  async function handleDelete(id) {
+    await deleteProject(id)
+    setProjects(prev => prev.filter(p => p.id !== id))
+  }
+
+  function handleAdded() {
+    setShowForm(false)
+    getProjects().then(data => setProjects(data.filter(p => p.active)))
+  }
 
   return (
     <section className="projects" id="projects">
-      <h2 className="projects__title">Proyectos</h2>
-      {loading
-        ? <p style={{ textAlign: 'center', opacity: 0.5 }}>Cargando...</p>
-        : <div className="projects__grid">
-            {projects.map(project => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-      }
+      <div className="container">
+        <div className="section__header">
+          <h2 className="projects__title">Proyectos</h2>
+          {user && <button className="section__add" onClick={() => setShowForm(true)}>+</button>}
+        </div>
+        {loading
+          ? <p style={{ textAlign: 'center', opacity: 0.5 }}>Cargando...</p>
+          : <div className="projects__grid">
+              {projects.map(project => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  isAdmin={!!user}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+        }
+        {showForm && <ProjectForm onClose={() => setShowForm(false)} onAdded={handleAdded} />}
+      </div>
     </section>
   )
 }

@@ -3,18 +3,24 @@
   --color-bg: #242424;
   --color-text: rgba(255, 255, 255, 0.87);
   --color-accent: #00d4ff;
+  --color-surface: #2e2e2e;
+  --color-border: rgba(255, 255, 255, 0.1);
 
   /* tipografía */
   --font-base: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-mono: 'Fira Code', 'Cascadia Code', monospace;
+  --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
   --font-size-lg: 1.2rem;
-  --font-size-xl: 4rem;
+  --font-size-xl: 3rem;
 
   /* espaciado */
+  --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
+  --space-xl: 3rem;
 
   /* bordes */
   --radius-sm: 4px;
@@ -32,3 +38,58 @@ body {
 }
 
 h1, h2, h3, p { margin: 0; }
+
+/* --- Contenedor global --- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+/* --- Secciones --- */
+section {
+  padding: var(--space-xl) 0;
+}
+
+
+/* --- Admin --- */
+.section__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.section__add {
+  background: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.section__add:hover { opacity: 0.7; }
+
+.card__delete {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  border-radius: var(--radius-sm);
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  z-index: 2;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+.card__delete:hover { opacity: 0.7; }

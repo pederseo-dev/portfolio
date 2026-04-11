@@ -1,31 +1,13 @@
+// src/features/navbar/navbar.jsx
 import { useState } from 'react'
 import { useAuth } from '../../app/auth'
 import LoginOverlay from '../admin/loginOverlay'
-import ProjectForm from '../admin/forms/projectsForm'
-import ExperienceForm from '../admin/forms/experienceForm'
 import './navbar.css'
 
 export default function Navbar() {
   const { user, logout } = useAuth()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [overlay, setOverlay] = useState(null) // 'login' | 'project' | 'experience'
-  const [pendingAction, setPendingAction] = useState(null)
-
-  function handleAction(action) {
-    console.log('handleAction', action, 'user:', user)
-    setMenuOpen(false)
-    if (!user) {
-      setPendingAction(action)
-      setOverlay('login')
-    } else {
-      setOverlay(action)
-    }
-  }
-
-  function onLoginSuccess() {
-    setOverlay(pendingAction)
-    setPendingAction(null)
-  }
+  const [showLogin, setShowLogin] = useState(false)
 
   return (
     <>
@@ -44,20 +26,15 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className="navbar__menu">
-          <button onClick={() => handleAction('project')}>+ Proyecto</button>
-          <button onClick={() => handleAction('experience')}>+ Experiencia</button>
-          {user && <button onClick={logout}>Cerrar sesión</button>}
+          {user
+            ? <button onClick={() => { logout(); setMenuOpen(false) }}>Cerrar sesión</button>
+            : <button onClick={() => { setShowLogin(true); setMenuOpen(false) }}>Iniciar sesión</button>
+          }
         </div>
       )}
 
-      {overlay === 'login' && (
-        <LoginOverlay onSuccess={onLoginSuccess} onClose={() => setOverlay(null)} />
-      )}
-      {overlay === 'project' && (
-        <ProjectForm onClose={() => setOverlay(null)} />
-      )}
-      {overlay === 'experience' && (
-        <ExperienceForm onClose={() => setOverlay(null)} />
+      {showLogin && (
+        <LoginOverlay onSuccess={() => setShowLogin(false)} onClose={() => setShowLogin(false)} />
       )}
     </>
   )

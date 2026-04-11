@@ -115,3 +115,5 @@
 .timeline__company { font-size: var(--font-size-md); opacity: 0.6; }
 .timeline__period { font-size: var(--font-size-sm); opacity: 0.5; }
 .timeline__description { font-size: var(--font-size-md); opacity: 0.8; line-height: 1.6; }
+
+.timeline__detail { position: relative; }

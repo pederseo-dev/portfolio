@@ -1,6 +1,6 @@
+// src/features/admin/forms/projectsForm.jsx
 import { useState } from 'react'
-import { collection, addDoc } from 'firebase/firestore'
-import { db } from '../../../app/fireBase'
+import { addProject } from '../../../db/projects'
 import '../admin.css'
 
 const INITIAL = {
@@ -15,7 +15,7 @@ const INITIAL = {
   active: true,
 }
 
-export default function ProjectForm({ onClose }) {
+export default function ProjectForm({ onClose, onAdded }) {
   const [form, setForm] = useState(INITIAL)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -26,18 +26,12 @@ export default function ProjectForm({ onClose }) {
   }
 
   async function handleSubmit() {
-    console.log('submitting', form)
     setLoading(true)
     setError(null)
     try {
-      const docRef = await addDoc(collection(db, 'portfolio-projects'), {
-        ...form,
-        stack: form.stack.split(',').map(s => s.trim()).filter(Boolean),
-      })
-      console.log('guardado', docRef.id)
-      onClose()
+      await addProject(form)
+      onAdded()
     } catch (e) {
-      console.log('error', e)
       setError('Error al guardar')
     } finally {
       setLoading(false)
