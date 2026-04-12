@@ -49,6 +49,11 @@ h1, h2, h3, p { margin: 0; }
 /* --- Secciones --- */
 section {
   padding: var(--space-xl) 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
 }
 
 
@@ -93,3 +98,7 @@ section {
 }
 
 .card__delete:hover { opacity: 0.7; }
+
+section > .container {
+  width: 100%;
+}

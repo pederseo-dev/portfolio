@@ -12,9 +12,9 @@ export default function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <a href="#hero" className="navbar__logo">Olaf</a>
+        <a href="#hero" className="navbar__logo">Olaf Pedersen</a>
         <ul className="navbar__links">
-          <li><a href="#about">Sobre mí</a></li>
+          <li><a href="#hero">Sobre mí</a></li>
           <li><a href="#experience">Experiencia</a></li>
           <li><a href="#projects">Proyectos</a></li>
           <li><a href="#contact">Contacto</a></li>
