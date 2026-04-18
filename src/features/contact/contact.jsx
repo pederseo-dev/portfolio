@@ -34,7 +34,6 @@ export default function Contact() {
     try {
         await fetch(ENDPOINT, {
         method: 'POST',
-        mode: 'no-cors',
         body: JSON.stringify(form),
         })
         setSent(true)
